@@ -1,5 +1,7 @@
 import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
-import {ensureNotificationPermission, showLocalNotification} from './src/notifications/localNotifications';
+import {ensureNotificationPermission, showLocalNotification, getExpoPushToken} from './src/notifications/localNotifications';
+import { useState } from 'react';
+import { requestPushFromServer } from './src/notifications/pushServer';
 
 export default function App() {
 
@@ -16,6 +18,20 @@ export default function App() {
     }
   };
 
+  const [serverStatus, setServerStatus] = useState('Sin solicitud remota');
+  const handleServerPush = async () => {
+    try {
+      setServerStatus('Preparando token...');
+      const token = await getExpoPushToken();
+      setServerStatus('Solicitando al servidor...');
+      const ticketId = await requestPushFromServer(token);
+      setServerStatus(`Expo aceptó el envío (${ticketId}). Revisa avisos.`);
+    } catch (error) {
+      console.error('Error de push remoto:', error);
+      setServerStatus(error instanceof Error ? error.message : String(error));
+    }
+  };
+
  return (
   <View style={styles.container}>
     <Text style={styles.title}>Laboratorio de avisos</Text>
@@ -28,6 +44,11 @@ export default function App() {
     >
       <Text style={styles.buttonText}>Enviar notificación</Text>
     </Pressable>
+    <Pressable style={[styles.button, styles.pushButton]}
+      onPress={handleServerPush}>
+      <Text style={styles.buttonText}>Pedir push al servidor</Text>
+    </Pressable>
+    <Text style={styles.serverStatus}>{serverStatus}</Text>
   </View>
  );
 }
@@ -39,4 +60,6 @@ const styles = StyleSheet.create({
   description: { textAlign: 'center', marginBottom: 24 },
   button: { backgroundColor: '#087f8c', padding: 16, borderRadius: 12 },
   buttonText: { color: 'white', fontWeight: 'bold' },
+  pushButton: { marginTop: 14, backgroundColor: '#3b5bdb' },
+  serverStatus: { marginTop: 14, textAlign: 'center' },
 });

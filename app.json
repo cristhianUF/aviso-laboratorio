@@ -10,6 +10,8 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "pe.edu.pam.cristhianu.pushlab",
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -18,8 +20,17 @@
       },
       "predictiveBackGestureEnabled": false
     },
+    "plugins": [
+      "expo-notifications"
+    ],
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "fe624d93-d729-47a7-be66-34070d7e6c20"
+      }
+    },
+    "owner": "cristhianu"
   }
 }

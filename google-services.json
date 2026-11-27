@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "867955120101",
+    "project_id": "pam-push---cristhian-uriarte",
+    "storage_bucket": "pam-push---cristhian-uriarte.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:867955120101:android:543c4c4d5a16dcb6c0410c",
+        "android_client_info": {
+          "package_name": "pe.edu.pam.cristhianu.pushlab"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSmSUEhPqibQ07ug5zNWv1-FM8qZ6JtUU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
